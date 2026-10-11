@@ -1,7 +1,6 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 
 function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
@@ -15,59 +14,35 @@ function InstagramIcon({ className = "w-3.5 h-3.5" }: { className?: string }) {
 }
 
 export default function Profiles() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Smooth vertical parallax movement for vintage trees background and elements
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const yGunungan = useTransform(scrollYProgress, [0, 1], [-15, 20]);
-  const yBride = useTransform(scrollYProgress, [0, 1], [12, -12]);
-  const yGroom = useTransform(scrollYProgress, [0, 1], [20, -15]);
-  const yPetalLeft = useTransform(scrollYProgress, [0, 1], [-35, 35]);
-  const yPetalRight = useTransform(scrollYProgress, [0, 1], [35, -35]);
-
   return (
     <section 
-      ref={sectionRef} 
       id="profiles" 
       className="relative w-full py-16 flex flex-col items-center text-center px-4 overflow-hidden"
     >
       
-      {/* VINTAGE BOTANICAL TREES & JOGLO BACKGROUND WITH CINEMATIC PARALLAX */}
+      {/* VINTAGE BOTANICAL TREES & JOGLO BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src="/bunga/vintage_trees_joglo_bg.webp"
             alt="Vintage Botanical Trees Background"
             fill
             sizes="(max-width: 480px) 100vw, 430px"
             loading="lazy"
-            className="object-cover object-center scale-105 opacity-85"
+            className="object-cover object-center opacity-85"
           />
           {/* Soft Warm Parchment Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#FDFBF7]/90 via-[#FDFBF7]/75 to-[#FDFBF7]/90" />
-        </motion.div>
+        </div>
       </div>
 
-      {/* FLOATING BOTANICAL PARALLAX ACCENTS */}
-      <motion.div
-        style={{ y: yPetalLeft }}
-        className="absolute top-28 -left-8 w-24 h-24 pointer-events-none opacity-60 z-10"
-      >
+      {/* FLOATING BOTANICAL ACCENTS */}
+      <div className="absolute top-28 -left-8 w-24 h-24 pointer-events-none opacity-60 z-10">
         <img src="/bunga/1.webp" alt="Floral Floating Left" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
-      <motion.div
-        style={{ y: yPetalRight }}
-        className="absolute bottom-36 -right-8 w-24 h-24 pointer-events-none opacity-60 z-10"
-      >
+      </div>
+      <div className="absolute bottom-36 -right-8 w-24 h-24 pointer-events-none opacity-60 z-10">
         <img src="/bunga/2.webp" alt="Floral Floating Right" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
+      </div>
 
       {/* ROYAL SIDE BORDER BANDS (MATCHING LUXURY INVITATION STATIONERY) */}
       <div className="absolute left-0 top-0 bottom-0 w-2.5 sm:w-3.5 bg-[#54161C] border-r border-[#C5A059]/70 z-20 pointer-events-none opacity-90">
@@ -85,11 +60,8 @@ export default function Profiles() {
         transition={{ duration: 0.8 }}
         className="max-w-md mx-auto mb-10 px-4 relative z-10"
       >
-        {/* Golden Gunungan Wayang Royal Emblem with Parallax Floating */}
-        <motion.div 
-          style={{ y: yGunungan }}
-          className="w-14 h-14 mx-auto mb-2 drop-shadow-[0_4px_12px_rgba(212,175,55,0.45)]"
-        >
+        {/* Golden Gunungan Wayang Royal Emblem */}
+        <div className="w-14 h-14 mx-auto mb-2 drop-shadow-[0_4px_12px_rgba(212,175,55,0.45)]">
           <Image
             src="/bunga/gunungan.webp"
             alt="Gunungan Wayang"
@@ -97,7 +69,7 @@ export default function Profiles() {
             height={70}
             className="w-full h-full object-contain filter drop-shadow"
           />
-        </motion.div>
+        </div>
 
         {/* Elegant Script Header: We Are Getting Married! */}
         <h2 className="font-script text-4xl sm:text-5xl text-[#8C6D37] mb-3 drop-shadow-sm font-normal">
@@ -122,7 +94,6 @@ export default function Profiles() {
         
         {/* 1. THE BRIDE (INTAN PERMATASARI) */}
         <motion.div
-          style={{ y: yBride }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -237,7 +208,6 @@ export default function Profiles() {
 
         {/* 2. THE GROOM (PUTRA PRATAMA) */}
         <motion.div
-          style={{ y: yGroom }}
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}

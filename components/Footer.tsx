@@ -1,20 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heart, ArrowUp } from "lucide-react";
 
 export default function Footer() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const glowY = useTransform(scrollYProgress, [0, 1], [-40, 40]);
-  const yGunungan = useTransform(scrollYProgress, [0, 1], [-15, 15]);
-
   const scrollToTop = () => {
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -23,7 +13,6 @@ export default function Footer() {
 
   return (
     <footer 
-      ref={sectionRef} 
       className="relative w-full pt-16 pb-20 sm:pb-24 bg-gradient-to-b from-[#220509] via-[#35080E] to-[#120204] text-center px-4 flex flex-col items-center overflow-hidden"
     >
       {/* Texture Background Overlay */}
@@ -36,17 +25,13 @@ export default function Footer() {
         />
       </div>
 
-      {/* Atmospheric Gold Ambient Glow with Parallax Translation */}
-      <motion.div 
-        style={{ y: glowY }}
+      {/* Atmospheric Gold Ambient Glow */}
+      <div 
         className="absolute top-10 left-1/2 -translate-x-1/2 w-[380px] h-[380px] bg-gradient-radial from-[#D4AF37]/20 via-[#8C1D24]/15 to-transparent rounded-full blur-3xl pointer-events-none" 
       />
 
-
-
-      {/* Javanese Gunungan Royal Closing Emblem with Parallax Floating */}
+      {/* Javanese Gunungan Royal Closing Emblem */}
       <motion.div
-        style={{ y: yGunungan }}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -71,7 +56,7 @@ export default function Footer() {
         className="relative z-10 w-full max-w-[390px] rounded-[3.2rem] p-[3px] bg-gradient-to-b from-[#8C1D24] via-[#5E1920] to-[#8C1D24] border-2 border-[#E5C158] shadow-[0_25px_60px_rgba(0,0,0,0.65)] mb-8"
       >
         {/* Inner Ivory Parchment Canvas with Double Hairline Borders */}
-        <div className="relative w-full h-full rounded-[3rem] bg-[#FDFBF7]/95 backdrop-blur-md px-6 py-9 flex flex-col items-center text-center overflow-hidden">
+        <div className="relative w-full h-full rounded-[3rem] bg-[#FDFBF7] px-6 py-9 flex flex-col items-center text-center overflow-hidden">
           
           {/* Recessed Red & Gold Hairline Borders */}
           <div className="absolute inset-2.5 rounded-[2.8rem] border border-[#78232B]/30 pointer-events-none" />
@@ -163,7 +148,7 @@ export default function Footer() {
         </p>
 
         {/* Prestigious Creator Seal */}
-        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#D4AF37]/30 backdrop-blur-sm shadow-inner">
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/5 border border-[#D4AF37]/30 shadow-inner">
           <span className="text-[#D4AF37] text-[9px]">✦</span>
           <p className="font-cinzel text-[#F3E5AB] text-[9.5px] tracking-widest uppercase font-semibold">
             Crafted with Love &bull; SubahGroup &amp; AksenRaras

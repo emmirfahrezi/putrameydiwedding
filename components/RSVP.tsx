@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Send, CheckCircle2, Users, Calendar, MessageSquareHeart, HeartHandshake } from "lucide-react";
 
@@ -16,16 +16,6 @@ interface RSVPItem {
 }
 
 export default function RSVP() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const yFloralLeft = useTransform(scrollYProgress, [0, 1], [-30, 30]);
-  const yFloralRight = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const yCard = useTransform(scrollYProgress, [0, 1], [15, -15]);
 
   // Initial guest list
   const [rsvps, setRsvps] = useState<RSVPItem[]>([
@@ -116,16 +106,12 @@ export default function RSVP() {
 
   return (
     <section 
-      ref={sectionRef} 
       id="rsvp" 
       className="relative w-full py-20 bg-transparent flex flex-col items-center px-4 overflow-hidden"
     >
-      {/* VINTAGE WATERMARK JOGLO BACKGROUND WITH PARALLAX */}
+      {/* VINTAGE WATERMARK JOGLO BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src="/bunga/vintage_trees_joglo_bg.webp"
             alt="Vintage Trees Watermark"
@@ -134,22 +120,16 @@ export default function RSVP() {
             loading="lazy"
             className="object-cover object-center"
           />
-        </motion.div>
+        </div>
       </div>
 
-      {/* FLOATING PARALLAX BOTANICAL ACCENTS */}
-      <motion.div
-        style={{ y: yFloralLeft }}
-        className="absolute top-28 -left-10 w-28 h-28 pointer-events-none opacity-70 z-0"
-      >
+      {/* BOTANICAL ACCENTS */}
+      <div className="absolute top-28 -left-10 w-28 h-28 pointer-events-none opacity-70 z-0">
         <Image src="/bunga/1.webp" alt="Floral Left" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
-      <motion.div
-        style={{ y: yFloralRight }}
-        className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-70 z-0"
-      >
+      </div>
+      <div className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-70 z-0">
         <Image src="/bunga/2.webp" alt="Floral Right" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
+      </div>
 
       {/* SECTION HEADER */}
       <motion.div
@@ -182,7 +162,6 @@ export default function RSVP() {
 
       {/* ROYAL RSVP FORM CARD */}
       <motion.div
-        style={{ y: yCard }}
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -190,7 +169,7 @@ export default function RSVP() {
         className="relative w-full max-w-[390px] rounded-[2.8rem] p-[3px] bg-gradient-to-b from-[#8C1D24] via-[#5E1920] to-[#8C1D24] border border-[#E5C158] shadow-[0_20px_50px_rgba(94,25,32,0.35)] mb-10 z-10"
       >
         {/* Inner Card Parchment Canvas */}
-        <div className="relative w-full h-full rounded-[2.6rem] bg-[#FDFBF7]/96 backdrop-blur-md px-6 py-8 flex flex-col overflow-hidden">
+        <div className="relative w-full h-full rounded-[2.6rem] bg-[#FDFBF7] px-6 py-8 flex flex-col overflow-hidden">
           
           {/* Double Recessed Hairline Borders */}
           <div className="absolute inset-2.5 rounded-[2.4rem] border border-[#78232B]/20 pointer-events-none" />
@@ -388,7 +367,7 @@ export default function RSVP() {
               key={item.id}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#FDFBF7]/95 backdrop-blur-sm p-4 rounded-2xl border border-[#C5A059]/40 shadow-xs text-left"
+              className="bg-[#FDFBF7] p-4 rounded-2xl border border-[#C5A059]/40 shadow-xs text-left"
             >
               <div className="flex items-center justify-between mb-1.5">
                 <span className="font-serif font-bold text-xs text-[#2C352E]">{item.name}</span>

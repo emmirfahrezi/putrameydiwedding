@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { X, ZoomIn, ChevronLeft, ChevronRight, LayoutGrid, SlidersHorizontal } from "lucide-react";
 
@@ -10,18 +10,6 @@ export default function Gallery() {
   const [sliderIdx, setSliderIdx] = useState(0);
   const [viewMode, setViewMode] = useState<"slider" | "grid">("slider");
   const [slideDirection, setSlideDirection] = useState(0);
-
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const yFloralLeft = useTransform(scrollYProgress, [0, 1], [-45, 45]);
-  const yFloralRight = useTransform(scrollYProgress, [0, 1], [45, -45]);
-  const yColEven = useTransform(scrollYProgress, [0, 1], [-18, 18]);
-  const yColOdd = useTransform(scrollYProgress, [0, 1], [18, -18]);
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
 
   const images = [
     "/Prewedding/weddingputra/PUTRA1.webp",
@@ -72,38 +60,28 @@ export default function Gallery() {
 
   return (
     <section 
-      ref={sectionRef} 
       id="gallery" 
       className="relative w-full py-20 bg-transparent flex flex-col items-center px-4 overflow-hidden"
     >
-      {/* VINTAGE WATERMARK JOGLO BACKGROUND WITH PARALLAX */}
+      {/* VINTAGE WATERMARK JOGLO BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src="/bunga/vintage_trees_joglo_bg.webp"
             alt="Vintage Background Watermark"
             fill
             className="object-cover object-center"
           />
-        </motion.div>
+        </div>
       </div>
       
-      {/* FLOATING PARALLAX FLORAL ACCENTS */}
-      <motion.div
-        style={{ y: yFloralLeft }}
-        className="absolute top-20 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <Image src="/bunga/1.webp" alt="Floral Parallax Left" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
-      <motion.div
-        style={{ y: yFloralRight }}
-        className="absolute bottom-28 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <Image src="/bunga/2.webp" alt="Floral Parallax Right" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
+      {/* FLORAL ACCENTS */}
+      <div className="absolute top-20 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <Image src="/bunga/1.webp" alt="Floral Left" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
+      <div className="absolute bottom-28 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <Image src="/bunga/2.webp" alt="Floral Right" width={140} height={140} className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
       
       {/* SECTION HEADER */}
       <motion.div
@@ -269,7 +247,6 @@ export default function Gallery() {
           {images.map((src, index) => (
             <motion.div
               key={index}
-              style={{ y: index % 2 === 0 ? yColEven : yColOdd }}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.1 }}

@@ -1,22 +1,11 @@
 "use client";
 
-import { useState, useEffect, useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { CalendarPlus } from "lucide-react";
 
 export default function Countdown() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Smooth cinematic vertical parallax translation
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  const yBox = useTransform(scrollYProgress, [0, 1], [12, -12]);
-  const yButton = useTransform(scrollYProgress, [0, 1], [20, -18]);
-  const yFloat = useTransform(scrollYProgress, [0, 1], [-25, 25]);
 
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
@@ -51,27 +40,23 @@ export default function Countdown() {
 
   return (
     <section 
-      ref={sectionRef} 
       className="relative w-full py-20 text-white flex flex-col items-center text-center px-4 overflow-hidden"
     >
       
-      {/* CINEMATIC PARALLAX PHOTO BACKGROUND */}
+      {/* PHOTO BACKGROUND */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[15%] left-0 right-0 w-full h-[130%]"
-        >
+        <div className="absolute inset-0 w-full h-full">
           <Image
             src="/Prewedding/weddingputra/PUTRA2.webp"
             alt="Riky & Meydi"
             fill
             sizes="(max-width: 480px) 100vw, 430px"
             loading="lazy"
-            className="object-cover object-[center_20%] scale-105 filter blur-[2px] brightness-[0.55]"
+            className="object-cover object-[center_20%] brightness-[0.5]"
           />
           {/* Royal Burgundy Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#2B080D]/90 via-[#3B0D12]/75 to-[#25060A]/92" />
-        </motion.div>
+        </div>
       </div>
 
       <motion.div
@@ -104,9 +89,8 @@ export default function Countdown() {
         </div>
       </motion.div>
 
-      {/* COUNTDOWN BOXES WITH DOUBLE GOLD BORDER & PARALLAX ELEVATION */}
+      {/* COUNTDOWN BOXES WITH DOUBLE GOLD BORDER */}
       <motion.div
-        style={{ y: yBox }}
         initial={{ opacity: 0, scale: 0.95 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -120,7 +104,7 @@ export default function Countdown() {
           { label: "Detik", value: timeLeft.seconds },
         ].map((item, index) => (
           <div key={index} className="flex flex-col items-center">
-            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black/40 backdrop-blur-md rounded-2xl flex items-center justify-center border-2 border-[#D4AF37] ring-1 ring-[#F3E5AB]/30 shadow-[0_8px_25px_rgba(0,0,0,0.5)] mb-2">
+            <div className="w-16 h-16 sm:w-20 sm:h-20 bg-black/60 rounded-2xl flex items-center justify-center border-2 border-[#D4AF37] ring-1 ring-[#F3E5AB]/30 shadow-[0_8px_25px_rgba(0,0,0,0.5)] mb-2">
               <span className="font-cinzel text-2xl sm:text-3xl font-bold text-[#F3E5AB] drop-shadow-sm">
                 {String(item.value).padStart(2, "0")}
               </span>
@@ -132,12 +116,11 @@ export default function Countdown() {
         ))}
       </motion.div>
 
-      {/* METALLIC GOLD CALENDAR BUTTON WITH PARALLAX LIFT */}
+      {/* METALLIC GOLD CALENDAR BUTTON */}
       <motion.a
         href={googleCalendarUrl}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ y: yButton }}
         initial={{ opacity: 0, y: 10 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}

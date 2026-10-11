@@ -1,27 +1,18 @@
 "use client";
 
 import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion, useScroll } from "framer-motion";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 
 export default function LoveStory() {
-  const sectionRef = useRef<HTMLElement>(null);
   const timelineRef = useRef<HTMLDivElement>(null);
 
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Timeline vertical line progress following scroll
+  // Timeline vertical line progress following scroll (lightweight hardware-accelerated scaleY)
   const { scrollYProgress: lineProgress } = useScroll({
     target: timelineRef,
     offset: ["start center", "end 80%"],
   });
-
-  // Smooth cinematic parallax translation for background
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-10%", "10%"]);
 
   const stories = [
     {
@@ -53,16 +44,12 @@ export default function LoveStory() {
   return (
     <section 
       id="story"
-      ref={sectionRef} 
       className="relative w-full bg-[#120F10] overflow-clip"
     >
       
-      {/* CINEMATIC STICKY VIEWPORT BACKGROUND (MENCEGAH NGEZOOM) */}
+      {/* CINEMATIC STICKY VIEWPORT BACKGROUND */}
       <div className="sticky top-0 left-0 w-full h-[100dvh] overflow-hidden pointer-events-none -mb-[100dvh] z-0">
-        <motion.div 
-          style={{ y: bgY }}
-          className="relative w-full h-[120%] -top-[10%]"
-        >
+        <div className="relative w-full h-full">
           <Image
             src="/Prewedding/weddingputra/PUTRA7.webp"
             alt="Riky & Meydi Background"
@@ -73,7 +60,7 @@ export default function LoveStory() {
           />
           {/* Subtle Atmospheric Gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#120F10]/80 via-black/20 to-[#120F10]/85" />
-        </motion.div>
+        </div>
       </div>
 
       {/* Decorative Gold Ambient Glows */}
@@ -142,7 +129,7 @@ export default function LoveStory() {
                 <div className="absolute top-7 left-[2.45rem] sm:left-[2.75rem] transform -translate-y-1/2 w-3.5 h-3.5 bg-[#FDFBF7] border-l-2 border-b-2 border-[#C5A059]/70 rotate-45 z-10 pointer-events-none" />
 
                 {/* Story Card */}
-                <div className="relative w-full bg-[#FDFBF7]/95 backdrop-blur-md rounded-3xl p-5 shadow-[0_20px_45px_rgba(0,0,0,0.5)] border-2 border-[#C5A059]/70 flex flex-col items-center">
+                <div className="relative w-full bg-[#FDFBF7] rounded-3xl p-5 shadow-[0_20px_45px_rgba(0,0,0,0.5)] border-2 border-[#C5A059]/70 flex flex-col items-center">
                   
                   {/* Gold Corner Filigree Accents */}
                   <div className="absolute top-2.5 left-2.5 w-3 h-3 border-t-2 border-l-2 border-[#C5A059]" />

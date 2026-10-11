@@ -1,55 +1,37 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll, useTransform } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Calendar, MapPin, Clock, ExternalLink } from "lucide-react";
 
 export default function EventDetails() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  // Smooth cinematic vertical parallax translation
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-12%", "12%"]);
-  const yGunungan = useTransform(scrollYProgress, [0, 1], [-20, 20]);
-  const yCard1 = useTransform(scrollYProgress, [0, 1], [12, -12]);
-  const yCard2 = useTransform(scrollYProgress, [0, 1], [22, -18]);
-
   return (
     <section 
-      ref={sectionRef} 
       id="events" 
       className="relative w-full bg-[#1E060A] overflow-clip"
     >
       
-      {/* CINEMATIC STICKY VIEWPORT PHOTO BACKGROUND (MENCEGAH NGEZOOM) */}
+      {/* CINEMATIC STICKY VIEWPORT PHOTO BACKGROUND */}
       <div className="sticky top-0 left-0 w-full h-[100dvh] overflow-hidden pointer-events-none -mb-[100dvh] z-0">
-        <motion.div 
-          style={{ y: bgY }}
-          className="relative w-full h-[120%] -top-[10%]"
-        >
+        <div className="relative w-full h-full">
           <Image
             src="/Prewedding/weddingputra/PUTRA4.webp"
             alt="Riky & Meydi Wedding Background"
             fill
             sizes="(max-width: 480px) 100vw, 430px"
             loading="lazy"
-            className="object-cover object-[center_20%] scale-105 filter blur-[2px] brightness-[0.55]"
+            className="object-cover object-[center_20%] brightness-[0.5]"
           />
           {/* Luxury Royal Wine & Dark Shadow Gradient */}
           <div className="absolute inset-0 bg-gradient-to-b from-[#1E060A]/85 via-[#2E0B11]/70 to-[#1E060A]/90" />
-        </motion.div>
+        </div>
       </div>
 
       {/* SECTION CONTENT OVERLAY */}
       <div className="relative z-10 w-full py-20 flex flex-col items-center text-center px-4">
 
-      {/* Javanese Gunungan Royal Emblem Accent with Parallax Floating */}
+      {/* Javanese Gunungan Royal Emblem Accent */}
       <motion.div
-        style={{ y: yGunungan }}
         initial={{ opacity: 0, scale: 0.8 }}
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true, amount: 0.1 }}
@@ -119,7 +101,6 @@ export default function EventDetails() {
 
         {/* Grand Unified Capsule Tablet with Multi-Layer Gold & Royal Burgundy Rim */}
         <motion.div
-          style={{ y: yCard1 }}
           initial={{ opacity: 0, scale: 0.92, y: 30 }}
           whileInView={{ opacity: 1, scale: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -127,7 +108,7 @@ export default function EventDetails() {
           className="relative w-full rounded-[3.5rem] p-[3px] bg-gradient-to-b from-[#8C1D24] via-[#5E1920] to-[#8C1D24] border-2 border-[#E5C158] shadow-[0_25px_60px_rgba(40,8,12,0.65)]"
         >
           {/* Inner Ivory Parchment Canvas */}
-          <div className="relative w-full h-full rounded-[3.3rem] bg-[#FDFBF7]/96 backdrop-blur-md px-6 py-9 flex flex-col items-center text-center overflow-hidden">
+          <div className="relative w-full h-full rounded-[3.3rem] bg-[#FDFBF7] px-6 py-9 flex flex-col items-center text-center overflow-hidden">
             
             {/* Double Recessed Gold & Royal Burgundy Hairline Borders */}
             <div className="absolute inset-2.5 rounded-[3.1rem] border border-[#78232B]/25 pointer-events-none" />

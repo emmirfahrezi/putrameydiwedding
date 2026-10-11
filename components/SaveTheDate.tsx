@@ -1,7 +1,7 @@
 "use client";
 
-import { useRef, useState, useEffect } from "react";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { useState, useEffect } from "react";
+import { motion, Variants } from "framer-motion";
 import Image from "next/image";
 import { CalendarHeart } from "lucide-react";
 
@@ -66,7 +66,6 @@ const cardVariants: Variants = {
 };
 
 export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [internalOpened, setInternalOpened] = useState(false);
   const isOpened = propIsOpened !== undefined ? propIsOpened : internalOpened;
 
@@ -79,31 +78,16 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
     return () => window.removeEventListener("invitationOpened", handleOpen);
   }, []);
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
-  });
-
-  const backgroundY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const treeLeftY = useTransform(scrollYProgress, [0, 1], [-20, 35]);
-  const treeRightY = useTransform(scrollYProgress, [0, 1], [-20, 35]);
-  const flowersLeftY = useTransform(scrollYProgress, [0, 1], [25, -25]);
-  const flowersRightY = useTransform(scrollYProgress, [0, 1], [25, -25]);
-  const cardY = useTransform(scrollYProgress, [0, 1], [12, -12]);
-
   return (
-    <section id="home" ref={containerRef} className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center bg-transparent py-14 px-4 overflow-hidden">
+    <section id="home" className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center bg-transparent py-14 px-4 overflow-hidden">
       
-      {/* 1. CINEMATIC BACKGROUND WITH PARALLAX & SMOOTH ZOOM TRANSITION */}
+      {/* 1. CINEMATIC BACKGROUND WITH SMOOTH ZOOM TRANSITION */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
-        <motion.div 
-          style={{ y: backgroundY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
+        <div className="absolute inset-0 w-full h-full">
           <motion.div 
             initial={{ scale: 1.25, opacity: 0.6 }}
-            animate={isOpened ? { scale: 1.08, opacity: 1 } : { scale: 1.25, opacity: 0.6 }}
-            transition={{ duration: 2.0, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
+            animate={isOpened ? { scale: 1.05, opacity: 1 } : { scale: 1.25, opacity: 0.6 }}
+            transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
             className="w-full h-full relative"
           >
             <Image 
@@ -112,92 +96,71 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
               fill 
               sizes="(max-width: 480px) 100vw, 430px"
               loading="lazy"
-              className="object-cover object-center scale-105"
+              className="object-cover object-center"
             />
           </motion.div>
-        </motion.div>
+        </div>
       </div>
 
-      {/* 2. POHON / DAHAN HIJAU MASUK DARI KIRI & KANAN DENGAN PARALLAX DEPTH */}
-      {/* Left Tree Foliage Sliding In + Parallax */}
+      {/* 2. POHON / DAHAN HIJAU MASUK DARI KIRI & KANAN */}
+      {/* Left Tree Foliage */}
       <motion.div
-        style={{ y: treeLeftY }}
+        variants={treeLeftVariants}
+        initial="closed"
+        animate={isOpened ? "opened" : "closed"}
         className="absolute -top-12 -left-14 w-48 sm:w-56 z-10 pointer-events-none"
       >
-        <motion.div
-          variants={treeLeftVariants}
-          initial="closed"
-          animate={isOpened ? "opened" : "closed"}
-          className="w-full h-full"
-        >
-          <div className="w-full h-full animate-sway">
-            <Image src="/bunga/1.webp" alt="Tree Left" width={300} height={300} className="w-full h-auto object-contain" />
-          </div>
-        </motion.div>
+        <div className="w-full h-full animate-sway">
+          <Image src="/bunga/1.webp" alt="Tree Left" width={300} height={300} className="w-full h-auto object-contain" />
+        </div>
       </motion.div>
 
-      {/* Right Tree Foliage Sliding In + Parallax */}
+      {/* Right Tree Foliage */}
       <motion.div
-        style={{ y: treeRightY }}
+        variants={treeRightVariants}
+        initial="closed"
+        animate={isOpened ? "opened" : "closed"}
         className="absolute -top-12 -right-14 w-48 sm:w-56 z-10 pointer-events-none"
       >
-        <motion.div
-          variants={treeRightVariants}
-          initial="closed"
-          animate={isOpened ? "opened" : "closed"}
-          className="w-full h-full"
-        >
-          <div className="w-full h-full animate-sway-reverse">
-            <Image src="/bunga/2.webp" alt="Tree Right" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
-          </div>
-        </motion.div>
+        <div className="w-full h-full animate-sway-reverse">
+          <Image src="/bunga/2.webp" alt="Tree Right" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
+        </div>
       </motion.div>
 
-      {/* 3. BUNGA-BUNGA MERAH MASUK DENGAN ELEGAN & PARALLAX COUNTER-MOTION */}
+      {/* 3. BUNGA-BUNGA MERAH MASUK DENGAN ELEGAN */}
       {/* Left Red Bouquet Blooms and Slides In */}
       <motion.div
-        style={{ y: flowersLeftY }}
+        variants={flowersLeftVariants}
+        initial="closed"
+        animate={isOpened ? "opened" : "closed"}
         className="absolute -bottom-8 -left-8 w-44 sm:w-52 z-20 pointer-events-none"
       >
-        <motion.div
-          variants={flowersLeftVariants}
-          initial="closed"
-          animate={isOpened ? "opened" : "closed"}
-          className="w-full h-full"
-        >
-          <div className="w-full h-full animate-sway">
-            <Image src="/bunga/bunga_merah_kiri.webp" alt="Red Flowers Left" width={280} height={280} className="w-full h-auto object-contain" />
-          </div>
-        </motion.div>
+        <div className="w-full h-full animate-sway">
+          <Image src="/bunga/bunga_merah_kiri.webp" alt="Red Flowers Left" width={280} height={280} className="w-full h-auto object-contain" />
+        </div>
       </motion.div>
 
       {/* Right Red Bouquet Blooms and Slides In */}
       <motion.div
-        style={{ y: flowersRightY }}
+        variants={flowersRightVariants}
+        initial="closed"
+        animate={isOpened ? "opened" : "closed"}
         className="absolute -bottom-8 -right-8 w-44 sm:w-52 z-20 pointer-events-none"
       >
-        <motion.div
-          variants={flowersRightVariants}
-          initial="closed"
-          animate={isOpened ? "opened" : "closed"}
-          className="w-full h-full"
-        >
-          <div className="w-full h-full animate-sway-reverse">
-            <Image src="/bunga/bunga_merah_kanan.webp" alt="Red Flowers Right" width={280} height={280} className="w-full h-auto object-contain" />
-          </div>
-        </motion.div>
+        <div className="w-full h-full animate-sway-reverse">
+          <Image src="/bunga/bunga_merah_kanan.webp" alt="Red Flowers Right" width={280} height={280} className="w-full h-auto object-contain" />
+        </div>
       </motion.div>
 
-      {/* 4. ROYAL RED CARTUCHE CARD DENGAN ELEVASI PARALLAX */}
+      {/* 4. ROYAL RED CARTUCHE CARD */}
       <motion.div 
-        style={{ y: cardY }}
         variants={cardVariants}
         initial="closed"
         animate={isOpened ? "opened" : "closed"}
         className="relative z-10 w-full max-w-[340px] rounded-[2.5rem] p-[3px] bg-gradient-to-b from-[#8C1D24] via-[#5E1920] to-[#8C1D24] border border-[#E5C158]/80 shadow-[0_20px_45px_rgba(94,25,32,0.4)]"
       >
         {/* Inner Card Container with Ivory Parchment & Double Hairline Border */}
-        <div className="relative w-full h-full rounded-[2.3rem] bg-[#FDFBF7]/95 backdrop-blur-md p-7 flex flex-col items-center justify-center text-center overflow-hidden">
+        <div className="relative w-full h-full rounded-[2.3rem] bg-[#FDFBF7] p-7 flex flex-col items-center justify-center text-center overflow-hidden">
           
           {/* Recessed Red & Gold Hairline Border */}
           <div className="absolute inset-2 rounded-[2rem] border border-[#78232B]/30 pointer-events-none" />

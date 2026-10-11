@@ -45,33 +45,34 @@ export default function BottomBar({ isOpen: propIsOpen }: BottomBarProps) {
     return () => window.removeEventListener("invitationOpened", handleOpen);
   }, []);
 
-  // Track active section on scroll
+  // Track active section efficiently using IntersectionObserver (zero scroll lag)
   useEffect(() => {
     if (!isVisible) return;
 
     const sectionIds = navItems.map((item) => item.id);
-    
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(Boolean) as HTMLElement[];
 
-      for (let i = sectionIds.length - 1; i >= 0; i--) {
-        const id = sectionIds[i];
-        const element = document.getElementById(id);
-        if (element) {
-          const top = element.offsetTop;
-          if (scrollPosition >= top) {
-            setActiveSection(id);
-            return;
-          }
+    if (elements.length === 0) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visible = entries.filter((e) => e.isIntersecting);
+        if (visible.length > 0) {
+          visible.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          setActiveSection(visible[0].target.id);
         }
+      },
+      {
+        rootMargin: "-20% 0px -40% 0px",
+        threshold: [0, 0.2, 0.5, 0.8],
       }
-      setActiveSection("home");
-    };
+    );
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    handleScroll();
+    elements.forEach((el) => observer.observe(el));
 
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => observer.disconnect();
   }, [isVisible]);
 
   const scrollTo = (id: string) => {
