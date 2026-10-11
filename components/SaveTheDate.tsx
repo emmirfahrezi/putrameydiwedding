@@ -92,7 +92,7 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
   const cardY = useTransform(scrollYProgress, [0, 1], [12, -12]);
 
   return (
-    <section ref={containerRef} className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center bg-transparent py-14 px-4 overflow-hidden">
+    <section id="home" ref={containerRef} className="relative min-h-[100dvh] w-full flex flex-col items-center justify-center bg-transparent py-14 px-4 overflow-hidden">
       
       {/* 1. CINEMATIC BACKGROUND WITH PARALLAX & SMOOTH ZOOM TRANSITION */}
       <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">

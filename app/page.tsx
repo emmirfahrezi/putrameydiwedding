@@ -11,6 +11,7 @@ import Gallery from "@/components/Gallery";
 import RSVP from "@/components/RSVP";
 import Footer from "@/components/Footer";
 import MusicPlayer from "@/components/MusicPlayer";
+import BottomBar from "@/components/BottomBar";
 
 export default function Home() {
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +28,7 @@ export default function Home() {
       <RSVP />
       <Footer />
       <MusicPlayer />
+      <BottomBar isOpen={isOpen} />
     </main>
   );
 }

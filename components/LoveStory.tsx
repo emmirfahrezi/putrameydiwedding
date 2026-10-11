@@ -52,6 +52,7 @@ export default function LoveStory() {
 
   return (
     <section 
+      id="story"
       ref={sectionRef} 
       className="relative w-full bg-[#120F10] overflow-clip"
     >

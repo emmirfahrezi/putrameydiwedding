@@ -44,7 +44,7 @@ export default function MusicPlayer() {
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
         onClick={togglePlay}
-        className="fixed bottom-6 right-6 z-50 w-13 h-13 bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] rounded-full shadow-[0_8px_25px_rgba(82,28,32,0.6)] border-2 border-[#D4AF37] ring-2 ring-[#C5A059]/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
+        className="fixed bottom-20 sm:bottom-24 right-4 sm:right-6 z-50 w-12 h-12 sm:w-13 sm:h-13 bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] rounded-full shadow-[0_8px_25px_rgba(82,28,32,0.6)] border-2 border-[#D4AF37] ring-2 ring-[#C5A059]/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
         aria-label="Toggle music"
       >
         <motion.div
