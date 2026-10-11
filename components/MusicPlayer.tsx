@@ -18,9 +18,6 @@ export default function MusicPlayer() {
       }
     };
 
-    // Try to auto-play when component mounts
-    playMusic();
-
     // Listen for custom event from Buka Undangan button
     window.addEventListener("startMusic", playMusic);
     
@@ -40,21 +37,21 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music/bg-music.mp3" loop />
+      <audio ref={audioRef} src="/music/bg-music.mp3" loop preload="none" />
       
       <motion.button
         initial={{ scale: 0 }}
         animate={{ scale: 1 }}
         transition={{ delay: 1, type: "spring", stiffness: 200 }}
         onClick={togglePlay}
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 bg-[#521C20] text-white rounded-full shadow-xl flex items-center justify-center hover:bg-[#3d1518] transition-colors"
+        className="fixed bottom-6 right-6 z-50 w-13 h-13 bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] rounded-full shadow-[0_8px_25px_rgba(82,28,32,0.6)] border-2 border-[#D4AF37] ring-2 ring-[#C5A059]/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
         aria-label="Toggle music"
       >
         <motion.div
           animate={{ rotate: isPlaying ? 360 : 0 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
         >
-          {isPlaying ? <Music size={20} /> : <Pause size={20} />}
+          {isPlaying ? <Music size={18} className="text-[#F3E5AB]" /> : <Pause size={18} className="text-[#F3E5AB]" />}
         </motion.div>
       </motion.button>
     </>

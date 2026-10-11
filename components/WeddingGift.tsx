@@ -2,238 +2,265 @@
 
 import { useState, useRef } from "react";
 import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
-import { Copy, Check, Gift, CreditCard, MapPin } from "lucide-react";
 import Image from "next/image";
+import { Copy, Check, Gift, MapPin, Wifi } from "lucide-react";
 
 export default function WeddingGift() {
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
-  const containerRef = useRef<HTMLSelectElement | any>(null);
+
+  const sectionRef = useRef<HTMLElement>(null);
   const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start end", "end start"]
+    target: sectionRef,
+    offset: ["start end", "end start"],
   });
 
-  const flowerTopY = useTransform(scrollYProgress, [0, 1], ["-30%", "30%"]);
-  const flowerBottomY = useTransform(scrollYProgress, [0, 1], ["30%", "-30%"]);
+  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
+  const yFloralLeft = useTransform(scrollYProgress, [0, 1], [-35, 35]);
+  const yFloralRight = useTransform(scrollYProgress, [0, 1], [35, -35]);
+  const yCardBCA = useTransform(scrollYProgress, [0, 1], [15, -15]);
+  const yCardMandiri = useTransform(scrollYProgress, [0, 1], [22, -18]);
+  const yCardAddress = useTransform(scrollYProgress, [0, 1], [30, -22]);
 
   const handleCopy = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
-    setCopiedStates({ ...copiedStates, [key]: true });
+    setCopiedStates((prev) => ({ ...prev, [key]: true }));
     setTimeout(() => {
       setCopiedStates((prev) => ({ ...prev, [key]: false }));
     }, 2000);
   };
 
   return (
-    <section ref={containerRef} className="relative w-full py-24 bg-transparent flex flex-col items-center px-6">
+    <section 
+      ref={sectionRef} 
+      id="gift" 
+      className="relative w-full py-16 bg-transparent flex flex-col items-center px-4 overflow-hidden"
+    >
+      {/* VINTAGE JOGLO WATERMARK BACKGROUND WITH PARALLAX */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
+        <motion.div 
+          style={{ y: bgY }}
+          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
+        >
+          <Image
+            src="/bunga/vintage_trees_joglo_bg.webp"
+            alt="Vintage Background Watermark"
+            fill
+            className="object-cover object-center"
+          />
+        </motion.div>
+      </div>
+
+      {/* FLOATING PARALLAX FLORAL ACCENTS */}
+      <motion.div
+        style={{ y: yFloralLeft }}
+        className="absolute top-24 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0"
+      >
+        <img src="/bunga/1.webp" alt="Floral Parallax Left" className="w-full h-full object-contain filter drop-shadow-md" />
+      </motion.div>
+      <motion.div
+        style={{ y: yFloralRight }}
+        className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0"
+      >
+        <img src="/bunga/2.webp" alt="Floral Parallax Right" className="w-full h-full object-contain filter drop-shadow-md" />
+      </motion.div>
       
-      {/* FLORAL CLUSTERS */}
-      {/* TOP LEFT */}
-      <motion.div
-        style={{ y: flowerTopY }}
-        className="absolute -top-12 -left-12 w-56 md:w-64 z-20 pointer-events-none"
-      >
-        <motion.div
-          initial={{ opacity: 0, x: -30, y: -30 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 1.5 }}
-          className="w-full h-full animate-sway"
-        >
-          <Image src="/bunga/bunga_merah_kiri.png" alt="Flower" width={300} height={300} className="w-full h-auto object-contain" />
-        </motion.div>
-      </motion.div>
-      <motion.div
-        style={{ y: flowerTopY }}
-        className="absolute top-0 -left-16 w-48 z-20 pointer-events-none"
-      >
-        <motion.div
-          initial={{ opacity: 0, x: -20, y: -20 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 1.5, delay: 0.2 }}
-          className="w-full h-full animate-sway-reverse"
-        >
-          <Image src="/bunga/1.png" alt="Flower" width={300} height={300} className="w-full h-auto object-contain" />
-        </motion.div>
-      </motion.div>
-
-      {/* TOP RIGHT */}
-      <motion.div
-        style={{ y: flowerTopY }}
-        className="absolute -top-12 -right-12 w-56 md:w-64 z-20 pointer-events-none"
-      >
-        <motion.div
-          initial={{ opacity: 0, x: 30, y: 30 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 1.5, delay: 0.1 }}
-          className="w-full h-full animate-sway-reverse"
-        >
-          <Image src="/bunga/bunga_merah_kanan.png" alt="Flower" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
-        </motion.div>
-      </motion.div>
-      <motion.div
-        style={{ y: flowerTopY }}
-        className="absolute top-0 -right-16 w-48 z-20 pointer-events-none"
-      >
-        <motion.div
-          initial={{ opacity: 0, x: 20, y: 20 }}
-          whileInView={{ opacity: 1, x: 0, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 1.5, delay: 0.3 }}
-          className="w-full h-full animate-sway"
-        >
-          <Image src="/bunga/2.png" alt="Flower" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
-        </motion.div>
-      </motion.div>
-
-      {/* Title */}
+      {/* SECTION HEADER */}
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: false, amount: 0.1 }}
+        viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.8 }}
-        className="relative z-30 mb-12 mt-12 md:mt-16 text-center"
+        className="text-center mb-8 max-w-sm mx-auto"
       >
-        <div className="flex justify-center mb-4">
-          <div className="w-12 h-12 rounded-full bg-[#C1A073]/20 flex items-center justify-center text-[#C1A073]">
-            <Gift size={24} />
-          </div>
+        <div className="w-13 h-13 rounded-full bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] flex items-center justify-center mx-auto mb-3 border-2 border-[#D4AF37] ring-2 ring-[#C5A059]/30 shadow-md">
+          <Gift size={22} className="text-[#F3E5AB]" />
         </div>
-        <p className="font-serif text-xl italic text-[#C1A073] mb-4" style={{ textShadow: "0 0 8px rgba(253, 251, 247, 0.9)" }}>Wedding Gift</p>
-        <h2 className="font-serif text-4xl md:text-5xl text-[#324335] font-bold tracking-widest" style={{ textShadow: "0 0 12px rgba(253, 251, 247, 0.9), 0 2px 4px rgba(255, 255, 255, 1)" }}>
-          Kirim Hadiah
+        
+        <div className="flex items-center justify-center gap-2 mb-1.5">
+          <span className="text-[#C5A059] text-[8px]">✦</span>
+          <p className="font-cinzel text-xs uppercase tracking-[0.35em] text-[#8C6D37] font-bold">
+            Wedding Gift
+          </p>
+          <span className="text-[#C5A059] text-[8px]">✦</span>
+        </div>
+
+        <h2 className="font-serif text-3xl md:text-4xl text-[#2C352E] font-bold mb-2">
+          Tanda Kasih
         </h2>
+
+        <p className="text-xs text-gray-600 leading-relaxed max-w-xs mx-auto">
+          Doa restu Anda merupakan karunia terindah bagi kami. Namun jika berkenan memberikan tanda kasih, dapat melalui:
+        </p>
+
+        <div className="flex items-center justify-center gap-2 mt-3">
+          <span className="w-8 h-[1px] bg-gradient-to-r from-transparent to-[#C5A059]" />
+          <span className="text-[#C5A059] text-[9px]">✦</span>
+          <span className="w-8 h-[1px] bg-gradient-to-l from-transparent to-[#C5A059]" />
+        </div>
       </motion.div>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: false, amount: 0.1 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="text-center text-sm md:text-base text-gray-700 max-w-lg mb-12 leading-relaxed z-30 relative"
-      >
-        Doa restu Anda merupakan karunia yang sangat berarti bagi kami. Namun jika Bapak/Ibu/Saudara/i bermaksud memberikan tanda kasih, dapat melalui fitur di bawah ini:
-      </motion.p>
-
-      {/* Gift Cards Container */}
-      <div className="w-full max-w-2xl flex flex-col gap-6 z-30 relative">
+      {/* LUXURY VIP GIFT CARDS */}
+      <div className="w-full max-w-sm flex flex-col gap-6 z-10">
         
-        {/* Bank Card 1 */}
+        {/* VIP Bank Card 1: BCA (Royal Burgundy & Gold Edition) */}
         <motion.div
+          style={{ y: yCardBCA }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="bg-white/80 backdrop-blur-md border-[2px] border-[#C1A073]/50 p-6 md:p-8 rounded-3xl shadow-xl flex flex-col items-center relative overflow-hidden"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8 }}
+          className="relative bg-gradient-to-br from-[#4A1017] via-[#5E1920] to-[#2B090E] border-2 border-[#D4AF37] p-6 rounded-3xl shadow-[0_15px_35px_rgba(74,16,23,0.35)] flex flex-col overflow-hidden text-white"
         >
-          {/* Decorative faint background icon */}
-          <div className="absolute -right-6 -bottom-6 text-[#C1A073] opacity-10 pointer-events-none">
-            <CreditCard size={120} />
+          {/* Subtle Metallic Card Background Shine */}
+          <div className="absolute top-0 right-0 w-44 h-44 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
+          
+          {/* Top Row: Bank Name & Contactless Wifi */}
+          <div className="flex items-center justify-between w-full mb-6">
+            <div>
+              <h3 className="font-serif text-2xl font-bold tracking-wider text-[#FDFBF7]">BCA</h3>
+              <p className="font-cinzel text-[9px] text-[#F3E5AB]/80 uppercase tracking-widest">Bank Central Asia</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-[#F3E5AB]/70">
+              <Wifi size={20} className="rotate-90" />
+            </div>
           </div>
-          
-          <h3 className="font-serif text-2xl font-bold text-[#324335] mb-1">BCA</h3>
-          <p className="text-gray-500 text-sm mb-6 uppercase tracking-widest">Bank Central Asia</p>
-          
-          <p className="font-mono text-2xl md:text-3xl font-semibold text-[#4A171E] mb-2 tracking-[0.1em]">
+
+          {/* Gold EMV Chip Graphic */}
+          <div className="w-10 h-8 rounded-md bg-gradient-to-br from-[#E5C158] via-[#BF953F] to-[#8C6D37] border border-[#F3E5AB] flex flex-col justify-around px-1.5 py-1 mb-5 shadow-sm opacity-90">
+            <div className="w-full h-[1px] bg-black/30" />
+            <div className="w-full h-[1px] bg-black/30" />
+          </div>
+
+          {/* Account Number in Embossed Style */}
+          <p className="font-mono text-2xl font-bold text-[#F3E5AB] mb-1 tracking-[0.18em] drop-shadow-md">
             1234 5678 90
           </p>
-          <p className="text-gray-700 font-medium mb-6">a.n. Putra Muhammad</p>
-          
+          <p className="font-cinzel text-xs text-gray-300 uppercase tracking-wider mb-5 font-medium">
+            a.n. Riky Saputra
+          </p>
+
+          {/* Metallic Gold Copy Button */}
           <button 
             onClick={() => handleCopy("1234567890", "bca")}
-            className="flex items-center gap-2 px-6 py-3 bg-[#4A171E] text-white rounded-full text-sm font-semibold hover:bg-[#341015] transition-colors shadow-md"
+            className="relative group overflow-hidden w-full inline-flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38728] text-[#3B0D12] rounded-xl text-xs font-bold tracking-wider transition-all shadow-md active:scale-98 cursor-pointer"
           >
+            <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 animate-shimmer-sweep pointer-events-none" />
             <AnimatePresence mode="wait">
               {copiedStates["bca"] ? (
                 <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Check size={16} />
+                  <Check size={14} className="text-[#3B0D12]" />
                 </motion.div>
               ) : (
                 <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Copy size={16} />
+                  <Copy size={14} className="text-[#3B0D12]" />
                 </motion.div>
               )}
             </AnimatePresence>
-            {copiedStates["bca"] ? "BERHASIL DISALIN" : "SALIN NO. REKENING"}
+            <span className="font-cinzel text-[11px] font-bold">
+              {copiedStates["bca"] ? "BERHASIL DISALIN" : "SALIN NOMOR REKENING"}
+            </span>
           </button>
         </motion.div>
 
-        {/* Bank Card 2 */}
+        {/* VIP Bank Card 2: Mandiri (Midnight Emerald & Gold Edition) */}
         <motion.div
+          style={{ y: yCardMandiri }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="bg-white/80 backdrop-blur-md border-[2px] border-[#C1A073]/50 p-6 md:p-8 rounded-3xl shadow-xl flex flex-col items-center relative overflow-hidden"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+          className="relative bg-gradient-to-br from-[#1C2C22] via-[#243B2E] to-[#121E17] border-2 border-[#D4AF37] p-6 rounded-3xl shadow-[0_15px_35px_rgba(28,44,34,0.35)] flex flex-col overflow-hidden text-white"
         >
-          <div className="absolute -right-6 -bottom-6 text-[#C1A073] opacity-10 pointer-events-none">
-            <CreditCard size={120} />
+          <div className="absolute top-0 right-0 w-44 h-44 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
+
+          {/* Top Row: Bank Name & Contactless Wifi */}
+          <div className="flex items-center justify-between w-full mb-6">
+            <div>
+              <h3 className="font-serif text-2xl font-bold tracking-wider text-[#FDFBF7]">MANDIRI</h3>
+              <p className="font-cinzel text-[9px] text-[#F3E5AB]/80 uppercase tracking-widest">Bank Mandiri</p>
+            </div>
+            <div className="flex items-center gap-1.5 text-[#F3E5AB]/70">
+              <Wifi size={20} className="rotate-90" />
+            </div>
           </div>
-          
-          <h3 className="font-serif text-2xl font-bold text-[#324335] mb-1">MANDIRI</h3>
-          <p className="text-gray-500 text-sm mb-6 uppercase tracking-widest">Bank Mandiri</p>
-          
-          <p className="font-mono text-2xl md:text-3xl font-semibold text-[#4A171E] mb-2 tracking-[0.1em]">
+
+          {/* Gold EMV Chip Graphic */}
+          <div className="w-10 h-8 rounded-md bg-gradient-to-br from-[#E5C158] via-[#BF953F] to-[#8C6D37] border border-[#F3E5AB] flex flex-col justify-around px-1.5 py-1 mb-5 shadow-sm opacity-90">
+            <div className="w-full h-[1px] bg-black/30" />
+            <div className="w-full h-[1px] bg-black/30" />
+          </div>
+
+          {/* Account Number in Embossed Style */}
+          <p className="font-mono text-2xl font-bold text-[#F3E5AB] mb-1 tracking-[0.18em] drop-shadow-md">
             0987 6543 21
           </p>
-          <p className="text-gray-700 font-medium mb-6">a.n. Intan Naila</p>
-          
+          <p className="font-cinzel text-xs text-gray-300 uppercase tracking-wider mb-5 font-medium">
+            a.n. Meidy Purnama Ariyani
+          </p>
+
+          {/* Metallic Gold Copy Button */}
           <button 
             onClick={() => handleCopy("0987654321", "mandiri")}
-            className="flex items-center gap-2 px-6 py-3 bg-[#4A171E] text-white rounded-full text-sm font-semibold hover:bg-[#341015] transition-colors shadow-md"
+            className="relative group overflow-hidden w-full inline-flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38728] text-[#3B0D12] rounded-xl text-xs font-bold tracking-wider transition-all shadow-md active:scale-98 cursor-pointer"
           >
+            <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 animate-shimmer-sweep pointer-events-none" />
             <AnimatePresence mode="wait">
               {copiedStates["mandiri"] ? (
                 <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Check size={16} />
+                  <Check size={14} className="text-[#3B0D12]" />
                 </motion.div>
               ) : (
                 <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Copy size={16} />
+                  <Copy size={14} className="text-[#3B0D12]" />
                 </motion.div>
               )}
             </AnimatePresence>
-            {copiedStates["mandiri"] ? "BERHASIL DISALIN" : "SALIN NO. REKENING"}
+            <span className="font-cinzel text-[11px] font-bold">
+              {copiedStates["mandiri"] ? "BERHASIL DISALIN" : "SALIN NOMOR REKENING"}
+            </span>
           </button>
         </motion.div>
 
-        {/* Physical Address */}
+        {/* Physical Address Card */}
         <motion.div
+          style={{ y: yCardAddress }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.1 }}
-          transition={{ duration: 0.8, delay: 0.5 }}
-          className="bg-[#324335] text-white p-6 md:p-8 rounded-3xl shadow-xl flex flex-col items-center text-center mt-4"
+          viewport={{ once: true, amount: 0.1 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          className="relative bg-[#FDFBF7]/90 backdrop-blur-md p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 flex flex-col items-center text-center"
         >
-          <MapPin size={32} className="text-[#C1A073] mb-4" />
-          <h3 className="font-serif text-2xl font-bold mb-4">Kirim Kado Fisik</h3>
-          <p className="text-sm text-gray-200 mb-6 leading-relaxed max-w-sm">
-            Bagi yang ingin mengirimkan kado fisik, dapat mengirimkannya ke alamat berikut:
+          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] flex items-center justify-center mb-3 border border-[#D4AF37]/60 shadow-md">
+            <MapPin size={20} />
+          </div>
+          <h3 className="font-serif text-xl font-bold text-[#2C352E] mb-1">Kirim Kado Fisik</h3>
+          <p className="text-xs text-gray-600 mb-4 leading-relaxed max-w-xs">
+            Bagi yang ingin mengirimkan kado fisik, dapat dikirimkan ke alamat berikut:
           </p>
-          <div className="bg-black/20 p-4 rounded-xl w-full mb-6 text-sm text-gray-100">
-            <p className="font-semibold mb-1">Penerima: Putra & Intan</p>
-            <p>Perumahan Indah Asri Blok C No. 12,</p>
-            <p>Kecamatan Damai, Kota Bahagia, 12345</p>
-            <p className="mt-2 text-[#C1A073] font-mono">0812-3456-7890</p>
+          <div className="bg-[#F6F2EC] p-3.5 rounded-2xl w-full mb-4 text-xs text-gray-700 border border-[#C5A059]/30">
+            <p className="font-bold text-[#2C352E] mb-0.5">Penerima: Riky &amp; Meydi</p>
+            <p>Gedung Community Center</p>
+            <p>Simpang Lagoi, Kota Baru</p>
+            <p className="mt-1 font-mono font-semibold text-[#8C6D37]">0812-3456-7890</p>
           </div>
           <button 
-            onClick={() => handleCopy("Perumahan Indah Asri Blok C No. 12, Kecamatan Damai, Kota Bahagia, 12345", "alamat")}
-            className="flex items-center gap-2 px-6 py-3 bg-[#C1A073] text-[#4A171E] rounded-full text-sm font-bold hover:bg-[#a5865d] transition-colors shadow-md"
+            onClick={() => handleCopy("Gedung Community Center, Simpang Lagoi, Kota Baru", "alamat")}
+            className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-gradient-to-r from-[#5E1920] to-[#3B0D12] border border-[#D4AF37]/70 text-[#FDFBF7] rounded-full text-xs font-semibold tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
           >
             <AnimatePresence mode="wait">
               {copiedStates["alamat"] ? (
                 <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Check size={16} />
+                  <Check size={14} className="text-[#F3E5AB]" />
                 </motion.div>
               ) : (
                 <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Copy size={16} />
+                  <Copy size={14} />
                 </motion.div>
               )}
             </AnimatePresence>
-            {copiedStates["alamat"] ? "ALAMAT DISALIN" : "SALIN ALAMAT"}
+            <span className="font-cinzel text-[11px] font-bold">
+              {copiedStates["alamat"] ? "ALAMAT DISALIN" : "SALIN ALAMAT"}
+            </span>
           </button>
         </motion.div>
 

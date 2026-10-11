@@ -16,10 +16,10 @@ export default function GlobalParallaxBackground() {
         className="absolute -top-[20%] left-0 right-0 w-full h-[150%] opacity-40"
       >
         <Image 
-          src="/mountain-parallax.jpg" 
+          src="/mountain-parallax.webp" 
           alt="Global Mountain Parallax Background" 
           fill 
-          className="object-cover object-top"
+          className="object-cover object-top" 
           priority
         />
       </motion.div>
