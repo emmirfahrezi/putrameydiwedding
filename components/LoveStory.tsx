@@ -1,32 +1,23 @@
 "use client";
 
-import { useRef } from "react";
-import { motion, useScroll } from "framer-motion";
+import { motion } from "framer-motion";
 import Image from "next/image";
 import { Heart } from "lucide-react";
 
 export default function LoveStory() {
-  const timelineRef = useRef<HTMLDivElement>(null);
-
-  // Timeline vertical line progress following scroll (lightweight hardware-accelerated scaleY)
-  const { scrollYProgress: lineProgress } = useScroll({
-    target: timelineRef,
-    offset: ["start center", "end 80%"],
-  });
-
   const stories = [
     {
       roman: "CHAPTER I",
       title: "Awal Pertemuan",
-      date: "Agustus 2024",
+      date: "April 2022",
       description:
-        "Tidak ada yang kebetulan di dunia ini, semua sudah tersusun sangat rapi oleh Sang Maha Kuasa. Kita tidak pernah bisa memilih kepada siapa kita akan jatuh cinta. Tuhan mempertemukan kami di bulan Agustus 2024 sebagai rekan kerja, yang menjadi awal mula dari kisah perjalanan indah ini.",
+        "Tidak ada yang kebetulan di dunia ini, semua sudah tersusun sangat rapi oleh Sang Maha Kuasa. Kita tidak pernah bisa memilih kepada siapa kita akan jatuh cinta. Tuhan mempertemukan kami di bulan April 2022 sebagai rekan kerja, yang menjadi awal mula dari kisah perjalanan indah ini.",
       image: "/Prewedding/weddingputra/PUTRA1.webp",
     },
     {
       roman: "CHAPTER II",
       title: "Menjalin Hubungan",
-      date: "Oktober 2024",
+      date: "Agustus 2022",
       description:
         "Seiring berjalannya waktu, kedekatan kami semakin erat. Dari sekadar rekan kerja, kami mulai saling memahami, berbagi cerita dan saling mendukung satu sama lain. Perasaan nyaman dan keyakinan di hati meyakinkan kami untuk melangkah ke tahap yang lebih serius.",
       image: "/Prewedding/weddingputra/PUTRA5.webp",
@@ -34,7 +25,7 @@ export default function LoveStory() {
     {
       roman: "CHAPTER III",
       title: "Lamaran & Komitmen",
-      date: "Desember 2025",
+      date: "Mei 2026",
       description:
         "Dengan penuh ketulusan serta doa restu dari kedua keluarga besar, kami melangsungkan acara lamaran yang hangat dan penuh makna. Sebuah janji suci terikat sebagai tanda keseriusan untuk bersama-sama membangun bahtera rumah tangga.",
       image: "/Prewedding/weddingputra/PUTRA6.webp",
@@ -47,20 +38,18 @@ export default function LoveStory() {
       className="relative w-full bg-[#120F10] overflow-clip"
     >
       
-      {/* CINEMATIC STICKY VIEWPORT BACKGROUND */}
-      <div className="sticky top-0 left-0 w-full h-[100dvh] overflow-hidden pointer-events-none -mb-[100dvh] z-0">
-        <div className="relative w-full h-full">
-          <Image
-            src="/Prewedding/weddingputra/PUTRA7.webp"
-            alt="Riky & Meydi Background"
-            fill
-            sizes="(max-width: 480px) 100vw, 430px"
-            loading="lazy"
-            className="object-cover object-[center_28%] brightness-[0.88] contrast-[1.02]"
-          />
-          {/* Subtle Atmospheric Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#120F10]/80 via-black/20 to-[#120F10]/85" />
-        </div>
+      {/* CINEMATIC PHOTO BACKGROUND */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/Prewedding/weddingputra/PUTRA7.webp"
+          alt="Riky & Meydi Background"
+          fill
+          sizes="(max-width: 480px) 100vw, 430px"
+          loading="lazy"
+          className="object-cover object-[center_28%] brightness-[0.88] contrast-[1.02]"
+        />
+        {/* Subtle Atmospheric Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#120F10]/85 via-black/25 to-[#120F10]/90" />
       </div>
 
       {/* Decorative Gold Ambient Glows */}
@@ -97,17 +86,11 @@ export default function LoveStory() {
           </div>
         </motion.div>
 
-        {/* TIMELINE CONTAINER DENGAN PARALLAX PROGRESS LINE */}
-        <div ref={timelineRef} className="relative w-full max-w-[390px] mx-auto z-10">
+        {/* TIMELINE CONTAINER */}
+        <div className="relative w-full max-w-[390px] mx-auto z-10">
           
-          {/* 1. Track Line Latar Belakang */}
-          <div className="absolute left-5 sm:left-6 top-8 bottom-12 w-[3px] bg-gradient-to-b from-[#D4AF37]/25 via-white/15 to-[#D4AF37]/25 -translate-x-1/2 rounded-full pointer-events-none" />
-
-          {/* 2. Parallax Animated Golden Progress Line yang Mengikuti Scroll */}
-          <motion.div 
-            style={{ scaleY: lineProgress }}
-            className="absolute left-5 sm:left-6 top-8 bottom-12 w-[3px] bg-gradient-to-b from-[#E5C158] via-[#FFF1C5] to-[#D4AF37] -translate-x-1/2 origin-top rounded-full shadow-[0_0_14px_rgba(229,193,88,0.9)] z-0 pointer-events-none"
-          />
+          {/* Golden Timeline Line */}
+          <div className="absolute left-5 sm:left-6 top-8 bottom-12 w-[3px] bg-gradient-to-b from-[#E5C158] via-[#FFF1C5] to-[#D4AF37] -translate-x-1/2 rounded-full shadow-[0_0_8px_rgba(229,193,88,0.4)] z-0 pointer-events-none" />
 
           {/* 3. Story Cards List */}
           <div className="flex flex-col gap-9">

@@ -110,9 +110,7 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
         animate={isOpened ? "opened" : "closed"}
         className="absolute -top-12 -left-14 w-48 sm:w-56 z-10 pointer-events-none"
       >
-        <div className="w-full h-full animate-sway">
-          <Image src="/bunga/1.webp" alt="Tree Left" width={300} height={300} className="w-full h-auto object-contain" />
-        </div>
+        <Image src="/bunga/1.webp" alt="Tree Left" width={300} height={300} className="w-full h-auto object-contain" />
       </motion.div>
 
       {/* Right Tree Foliage */}
@@ -122,9 +120,7 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
         animate={isOpened ? "opened" : "closed"}
         className="absolute -top-12 -right-14 w-48 sm:w-56 z-10 pointer-events-none"
       >
-        <div className="w-full h-full animate-sway-reverse">
-          <Image src="/bunga/2.webp" alt="Tree Right" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
-        </div>
+        <Image src="/bunga/2.webp" alt="Tree Right" width={300} height={300} className="w-full h-auto object-contain transform scale-y-[-1]" />
       </motion.div>
 
       {/* 3. BUNGA-BUNGA MERAH MASUK DENGAN ELEGAN */}
@@ -135,9 +131,7 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
         animate={isOpened ? "opened" : "closed"}
         className="absolute -bottom-8 -left-8 w-44 sm:w-52 z-20 pointer-events-none"
       >
-        <div className="w-full h-full animate-sway">
-          <Image src="/bunga/bunga_merah_kiri.webp" alt="Red Flowers Left" width={280} height={280} className="w-full h-auto object-contain" />
-        </div>
+        <Image src="/bunga/bunga_merah_kiri.webp" alt="Red Flowers Left" width={280} height={280} className="w-full h-auto object-contain" />
       </motion.div>
 
       {/* Right Red Bouquet Blooms and Slides In */}
@@ -147,9 +141,7 @@ export default function SaveTheDate({ isOpened: propIsOpened }: SaveTheDateProps
         animate={isOpened ? "opened" : "closed"}
         className="absolute -bottom-8 -right-8 w-44 sm:w-52 z-20 pointer-events-none"
       >
-        <div className="w-full h-full animate-sway-reverse">
-          <Image src="/bunga/bunga_merah_kanan.webp" alt="Red Flowers Right" width={280} height={280} className="w-full h-auto object-contain" />
-        </div>
+        <Image src="/bunga/bunga_merah_kanan.webp" alt="Red Flowers Right" width={280} height={280} className="w-full h-auto object-contain" />
       </motion.div>
 
       {/* 4. ROYAL RED CARTUCHE CARD */}

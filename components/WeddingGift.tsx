@@ -1,25 +1,12 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Copy, Check, Gift, MapPin, Wifi } from "lucide-react";
 
 export default function WeddingGift() {
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
-
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const yFloralLeft = useTransform(scrollYProgress, [0, 1], [-35, 35]);
-  const yFloralRight = useTransform(scrollYProgress, [0, 1], [35, -35]);
-  const yCardBCA = useTransform(scrollYProgress, [0, 1], [15, -15]);
-  const yCardMandiri = useTransform(scrollYProgress, [0, 1], [22, -18]);
-  const yCardAddress = useTransform(scrollYProgress, [0, 1], [30, -22]);
 
   const handleCopy = (text: string, key: string) => {
     navigator.clipboard.writeText(text);
@@ -31,38 +18,26 @@ export default function WeddingGift() {
 
   return (
     <section 
-      ref={sectionRef} 
       id="gift" 
       className="relative w-full py-16 bg-transparent flex flex-col items-center px-4 overflow-hidden"
     >
-      {/* VINTAGE JOGLO WATERMARK BACKGROUND WITH PARALLAX */}
+      {/* VINTAGE JOGLO WATERMARK BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
-          <Image
-            src="/bunga/vintage_trees_joglo_bg.webp"
-            alt="Vintage Background Watermark"
-            fill
-            className="object-cover object-center"
-          />
-        </motion.div>
+        <Image
+          src="/bunga/vintage_trees_joglo_bg.webp"
+          alt="Vintage Background Watermark"
+          fill
+          className="object-cover object-center"
+        />
       </div>
 
-      {/* FLOATING PARALLAX FLORAL ACCENTS */}
-      <motion.div
-        style={{ y: yFloralLeft }}
-        className="absolute top-24 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <img src="/bunga/1.webp" alt="Floral Parallax Left" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
-      <motion.div
-        style={{ y: yFloralRight }}
-        className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <img src="/bunga/2.webp" alt="Floral Parallax Right" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
+      {/* BOTANICAL ACCENTS */}
+      <div className="absolute top-24 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <img src="/bunga/1.webp" alt="Floral Left" className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
+      <div className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <img src="/bunga/2.webp" alt="Floral Right" className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
       
       {/* SECTION HEADER */}
       <motion.div
@@ -104,7 +79,6 @@ export default function WeddingGift() {
         
         {/* VIP Bank Card 1: BCA (Royal Burgundy & Gold Edition) */}
         <motion.div
-          style={{ y: yCardBCA }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -164,7 +138,6 @@ export default function WeddingGift() {
 
         {/* VIP Bank Card 2: Mandiri (Midnight Emerald & Gold Edition) */}
         <motion.div
-          style={{ y: yCardMandiri }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
@@ -223,12 +196,11 @@ export default function WeddingGift() {
 
         {/* Physical Address Card */}
         <motion.div
-          style={{ y: yCardAddress }}
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative bg-[#FDFBF7]/90 backdrop-blur-md p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 flex flex-col items-center text-center"
+          className="relative bg-[#FDFBF7] p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 flex flex-col items-center text-center"
         >
           <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] flex items-center justify-center mb-3 border border-[#D4AF37]/60 shadow-md">
             <MapPin size={20} />

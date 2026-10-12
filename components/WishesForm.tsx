@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useRef } from "react";
-import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Send, MessageSquareHeart, CheckCircle2 } from "lucide-react";
 
@@ -13,18 +13,6 @@ interface Wish {
 }
 
 export default function WishesForm() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start end", "end start"],
-  });
-
-  const bgY = useTransform(scrollYProgress, [0, 1], ["-8%", "8%"]);
-  const yFloralLeft = useTransform(scrollYProgress, [0, 1], [-30, 30]);
-  const yFloralRight = useTransform(scrollYProgress, [0, 1], [30, -30]);
-  const yFormCard = useTransform(scrollYProgress, [0, 1], [12, -12]);
-  const yList = useTransform(scrollYProgress, [0, 1], [20, -18]);
-
   const [wishes, setWishes] = useState<Wish[]>([
     {
       name: "Budi & Sarah",
@@ -71,38 +59,26 @@ export default function WishesForm() {
 
   return (
     <section 
-      ref={sectionRef} 
       id="wishes" 
       className="relative w-full py-16 bg-transparent flex flex-col items-center px-4 overflow-hidden"
     >
-      {/* VINTAGE JOGLO WATERMARK BACKGROUND WITH PARALLAX */}
+      {/* VINTAGE JOGLO WATERMARK BACKGROUND */}
       <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none opacity-20">
-        <motion.div 
-          style={{ y: bgY }}
-          className="absolute -top-[10%] left-0 right-0 w-full h-[120%]"
-        >
-          <Image
-            src="/bunga/vintage_trees_joglo_bg.webp"
-            alt="Vintage Background Watermark"
-            fill
-            className="object-cover object-center"
-          />
-        </motion.div>
+        <Image
+          src="/bunga/vintage_trees_joglo_bg.webp"
+          alt="Vintage Background Watermark"
+          fill
+          className="object-cover object-center"
+        />
       </div>
 
-      {/* FLOATING PARALLAX FLORAL ACCENTS */}
-      <motion.div
-        style={{ y: yFloralLeft }}
-        className="absolute top-24 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <img src="/bunga/1.webp" alt="Floral Parallax Left" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
-      <motion.div
-        style={{ y: yFloralRight }}
-        className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0"
-      >
-        <img src="/bunga/2.webp" alt="Floral Parallax Right" className="w-full h-full object-contain filter drop-shadow-md" />
-      </motion.div>
+      {/* BOTANICAL ACCENTS */}
+      <div className="absolute top-24 -left-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <img src="/bunga/1.webp" alt="Floral Left" className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
+      <div className="absolute bottom-32 -right-10 w-28 h-28 pointer-events-none opacity-75 z-0">
+        <img src="/bunga/2.webp" alt="Floral Right" className="w-full h-full object-contain filter drop-shadow-md" />
+      </div>
       
       {/* SECTION HEADER */}
       <motion.div
@@ -141,12 +117,11 @@ export default function WishesForm() {
 
       {/* ROYAL FORM CARD */}
       <motion.div
-        style={{ y: yFormCard }}
         initial={{ opacity: 0, y: 25 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.1 }}
         transition={{ duration: 0.8 }}
-        className="relative w-full max-w-sm bg-[#FDFBF7]/90 backdrop-blur-md p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 mb-8 z-10"
+        className="relative w-full max-w-sm bg-[#FDFBF7] p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 mb-8 z-10"
       >
         {/* Corner Accents */}
         <div className="absolute top-3 left-3 w-3 h-3 border-t-2 border-l-2 border-[#C5A059]" />
@@ -225,9 +200,8 @@ export default function WishesForm() {
         </form>
       </motion.div>
 
-      {/* WISHES STREAM LIST WITH PARALLAX DEPTH */}
-      <motion.div 
-        style={{ y: yList }}
+      {/* WISHES STREAM LIST */}
+      <div 
         className="w-full max-w-sm flex flex-col gap-3 z-10"
       >
         <p className="font-cinzel text-xs font-bold text-[#8C6D37] uppercase tracking-wider px-1">
@@ -240,7 +214,7 @@ export default function WishesForm() {
               key={idx}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="bg-[#FDFBF7]/90 backdrop-blur-sm p-4 rounded-2xl border border-[#C5A059]/30 shadow-sm text-left"
+              className="bg-[#FDFBF7] p-4 rounded-2xl border border-[#C5A059]/30 shadow-sm text-left"
             >
               <div className="flex items-center justify-between mb-1.5">
                 <span className="font-serif font-bold text-xs text-[#2C352E]">{item.name}</span>
@@ -253,7 +227,7 @@ export default function WishesForm() {
             </motion.div>
           ))}
         </div>
-      </motion.div>
+      </div>
 
     </section>
   );

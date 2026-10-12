@@ -11,20 +11,18 @@ export default function EventDetails() {
       className="relative w-full bg-[#1E060A] overflow-clip"
     >
       
-      {/* CINEMATIC STICKY VIEWPORT PHOTO BACKGROUND */}
-      <div className="sticky top-0 left-0 w-full h-[100dvh] overflow-hidden pointer-events-none -mb-[100dvh] z-0">
-        <div className="relative w-full h-full">
-          <Image
-            src="/Prewedding/weddingputra/PUTRA4.webp"
-            alt="Riky & Meydi Wedding Background"
-            fill
-            sizes="(max-width: 480px) 100vw, 430px"
-            loading="lazy"
-            className="object-cover object-[center_20%] brightness-[0.5]"
-          />
-          {/* Luxury Royal Wine & Dark Shadow Gradient */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#1E060A]/85 via-[#2E0B11]/70 to-[#1E060A]/90" />
-        </div>
+      {/* CINEMATIC PHOTO BACKGROUND */}
+      <div className="absolute inset-0 w-full h-full z-0 overflow-hidden pointer-events-none">
+        <Image
+          src="/Prewedding/weddingputra/PUTRA4.webp"
+          alt="Riky & Meydi Wedding Background"
+          fill
+          sizes="(max-width: 480px) 100vw, 430px"
+          loading="lazy"
+          className="object-cover object-[center_20%] brightness-[0.5]"
+        />
+        {/* Luxury Royal Wine & Dark Shadow Gradient */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#1E060A]/85 via-[#2E0B11]/70 to-[#1E060A]/90" />
       </div>
 
       {/* SECTION CONTENT OVERLAY */}
