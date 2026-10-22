@@ -65,7 +65,7 @@ export default function RSVP() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  // Pre-fill name from URL query parameter ?to= / ?nama= / ?guest=
+  // Pre-fill name from URL query parameter ?to= / ?nama= / ?guest= and sync with localStorage
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
@@ -73,10 +73,20 @@ export default function RSVP() {
       if (guest) {
         setName(guest);
       }
+
+      const saved = localStorage.getItem("wedding_rsvps");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setRsvps(parsed);
+          }
+        } catch {
+          // ignore
+        }
+      }
     }
   }, []);
-
-
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -92,7 +102,11 @@ export default function RSVP() {
       time: "Baru saja",
     };
 
-    setRsvps([newRSVP, ...rsvps]);
+    const updated = [newRSVP, ...rsvps];
+    setRsvps(updated);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("wedding_rsvps", JSON.stringify(updated));
+    }
     setMessage("");
     setSubmitted(true);
     setTimeout(() => setSubmitted(false), 3500);

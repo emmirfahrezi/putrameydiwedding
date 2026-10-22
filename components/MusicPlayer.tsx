@@ -72,6 +72,8 @@ export default function MusicPlayer() {
         <motion.div
           animate={{ rotate: isPlaying ? 360 : 0 }}
           transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+          className="transform-gpu"
+          style={{ willChange: "transform" }}
         >
           {isPlaying ? <Music size={18} className="text-[#F3E5AB]" /> : <Pause size={18} className="text-[#F3E5AB]" />}
         </motion.div>

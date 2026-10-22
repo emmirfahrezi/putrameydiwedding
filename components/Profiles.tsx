@@ -155,7 +155,7 @@ export default function Profiles() {
             <div className="relative w-full h-full rounded-[108px] p-[3px] bg-gradient-to-b from-[#7A1D25] via-[#56141A] to-[#7A1D25] shadow-[0_12px_30px_rgba(86,20,26,0.3)]">
               <div className="relative w-full h-full rounded-[105px] overflow-hidden bg-stone-200">
                 <Image
-                  src="/Prewedding/weddingputra/put8.jpeg"
+                  src="/Prewedding/weddingputra/put8.webp"
                   alt="Meidy Purnama Ariyani"
                   fill
                   priority
@@ -269,7 +269,7 @@ export default function Profiles() {
             <div className="relative w-full h-full rounded-[108px] p-[3px] bg-gradient-to-b from-[#7A1D25] via-[#56141A] to-[#7A1D25] shadow-[0_12px_30px_rgba(86,20,26,0.3)]">
               <div className="relative w-full h-full rounded-[105px] overflow-hidden bg-stone-200">
                 <Image
-                  src="/Prewedding/weddingputra/put3.jpeg"
+                  src="/Prewedding/weddingputra/put3.webp"
                   alt="Putra Pratama"
                   fill
                   priority

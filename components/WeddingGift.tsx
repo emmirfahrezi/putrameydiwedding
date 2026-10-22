@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-import { Copy, Check, Gift, MapPin, Wifi } from "lucide-react";
+import { Copy, Check, Gift, Wifi } from "lucide-react";
 
 export default function WeddingGift() {
   const [copiedStates, setCopiedStates] = useState<{ [key: string]: boolean }>({});
@@ -107,7 +107,7 @@ export default function WeddingGift() {
 
           {/* Account Number in Embossed Style */}
           <p className="font-mono text-2xl font-bold text-[#F3E5AB] mb-1 tracking-[0.18em] drop-shadow-md">
-            1234 5678 90
+            8080 5141 91
           </p>
           <p className="font-cinzel text-xs text-gray-300 uppercase tracking-wider mb-5 font-medium">
             a.n. Riky Saputra
@@ -115,7 +115,7 @@ export default function WeddingGift() {
 
           {/* Metallic Gold Copy Button */}
           <button 
-            onClick={() => handleCopy("1234567890", "bca")}
+            onClick={() => handleCopy("8080514191", "bca")}
             className="relative group overflow-hidden w-full inline-flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38728] text-[#3B0D12] rounded-xl text-xs font-bold tracking-wider transition-all shadow-md active:scale-98 cursor-pointer"
           >
             <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 animate-shimmer-sweep pointer-events-none" />
@@ -135,107 +135,6 @@ export default function WeddingGift() {
             </span>
           </button>
         </motion.div>
-
-        {/* VIP Bank Card 2: Mandiri (Midnight Emerald & Gold Edition) */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-          className="relative bg-gradient-to-br from-[#1C2C22] via-[#243B2E] to-[#121E17] border-2 border-[#D4AF37] p-6 rounded-3xl shadow-[0_15px_35px_rgba(28,44,34,0.35)] flex flex-col overflow-hidden text-white"
-        >
-          <div className="absolute top-0 right-0 w-44 h-44 bg-[#D4AF37]/10 rounded-full blur-2xl pointer-events-none" />
-
-          {/* Top Row: Bank Name & Contactless Wifi */}
-          <div className="flex items-center justify-between w-full mb-6">
-            <div>
-              <h3 className="font-serif text-2xl font-bold tracking-wider text-[#FDFBF7]">MANDIRI</h3>
-              <p className="font-cinzel text-[9px] text-[#F3E5AB]/80 uppercase tracking-widest">Bank Mandiri</p>
-            </div>
-            <div className="flex items-center gap-1.5 text-[#F3E5AB]/70">
-              <Wifi size={20} className="rotate-90" />
-            </div>
-          </div>
-
-          {/* Gold EMV Chip Graphic */}
-          <div className="w-10 h-8 rounded-md bg-gradient-to-br from-[#E5C158] via-[#BF953F] to-[#8C6D37] border border-[#F3E5AB] flex flex-col justify-around px-1.5 py-1 mb-5 shadow-sm opacity-90">
-            <div className="w-full h-[1px] bg-black/30" />
-            <div className="w-full h-[1px] bg-black/30" />
-          </div>
-
-          {/* Account Number in Embossed Style */}
-          <p className="font-mono text-2xl font-bold text-[#F3E5AB] mb-1 tracking-[0.18em] drop-shadow-md">
-            0987 6543 21
-          </p>
-          <p className="font-cinzel text-xs text-gray-300 uppercase tracking-wider mb-5 font-medium">
-            a.n. Meidy Purnama Ariyani
-          </p>
-
-          {/* Metallic Gold Copy Button */}
-          <button 
-            onClick={() => handleCopy("0987654321", "mandiri")}
-            className="relative group overflow-hidden w-full inline-flex items-center justify-center gap-2 py-2.5 bg-gradient-to-r from-[#D4AF37] via-[#F3E5AB] to-[#B38728] text-[#3B0D12] rounded-xl text-xs font-bold tracking-wider transition-all shadow-md active:scale-98 cursor-pointer"
-          >
-            <div className="absolute inset-0 w-1/2 h-full bg-gradient-to-r from-transparent via-white/30 to-transparent skew-x-12 animate-shimmer-sweep pointer-events-none" />
-            <AnimatePresence mode="wait">
-              {copiedStates["mandiri"] ? (
-                <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Check size={14} className="text-[#3B0D12]" />
-                </motion.div>
-              ) : (
-                <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Copy size={14} className="text-[#3B0D12]" />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <span className="font-cinzel text-[11px] font-bold">
-              {copiedStates["mandiri"] ? "BERHASIL DISALIN" : "SALIN NOMOR REKENING"}
-            </span>
-          </button>
-        </motion.div>
-
-        {/* Physical Address Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="relative bg-[#FDFBF7] p-6 rounded-3xl shadow-[0_15px_35px_rgba(0,0,0,0.12)] border border-[#C5A059]/50 flex flex-col items-center text-center"
-        >
-          <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#5E1920] to-[#3B0D12] text-[#F3E5AB] flex items-center justify-center mb-3 border border-[#D4AF37]/60 shadow-md">
-            <MapPin size={20} />
-          </div>
-          <h3 className="font-serif text-xl font-bold text-[#2C352E] mb-1">Kirim Kado Fisik</h3>
-          <p className="text-xs text-gray-600 mb-4 leading-relaxed max-w-xs">
-            Bagi yang ingin mengirimkan kado fisik, dapat dikirimkan ke alamat berikut:
-          </p>
-          <div className="bg-[#F6F2EC] p-3.5 rounded-2xl w-full mb-4 text-xs text-gray-700 border border-[#C5A059]/30">
-            <p className="font-bold text-[#2C352E] mb-0.5">Penerima: Riky &amp; Meydi</p>
-            <p>Gedung Community Center</p>
-            <p>Simpang Lagoi, Kota Baru</p>
-            <p className="mt-1 font-mono font-semibold text-[#8C6D37]">0812-3456-7890</p>
-          </div>
-          <button 
-            onClick={() => handleCopy("Gedung Community Center, Simpang Lagoi, Kota Baru", "alamat")}
-            className="inline-flex items-center gap-1.5 px-6 py-2.5 bg-gradient-to-r from-[#5E1920] to-[#3B0D12] border border-[#D4AF37]/70 text-[#FDFBF7] rounded-full text-xs font-semibold tracking-wider transition-all shadow-md active:scale-95 cursor-pointer"
-          >
-            <AnimatePresence mode="wait">
-              {copiedStates["alamat"] ? (
-                <motion.div key="check" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Check size={14} className="text-[#F3E5AB]" />
-                </motion.div>
-              ) : (
-                <motion.div key="copy" initial={{ scale: 0 }} animate={{ scale: 1 }} exit={{ scale: 0 }}>
-                  <Copy size={14} />
-                </motion.div>
-              )}
-            </AnimatePresence>
-            <span className="font-cinzel text-[11px] font-bold">
-              {copiedStates["alamat"] ? "ALAMAT DISALIN" : "SALIN ALAMAT"}
-            </span>
-          </button>
-        </motion.div>
-
       </div>
     </section>
   );

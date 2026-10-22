@@ -94,7 +94,7 @@ export default function BottomBar({ isOpen: propIsOpen }: BottomBarProps) {
           className="fixed bottom-3 sm:bottom-5 left-1/2 -translate-x-1/2 z-40 max-w-[95vw] sm:max-w-md w-auto"
           aria-label="Navigasi Undangan"
         >
-          <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-[#160608]/90 backdrop-blur-xl border border-[#D4AF37]/35 shadow-[0_10px_35px_rgba(0,0,0,0.7),0_0_20px_rgba(212,175,55,0.12)]">
+          <div className="flex items-center gap-1 sm:gap-1.5 px-2.5 sm:px-3.5 py-1.5 sm:py-2 rounded-full bg-[#180508] border border-[#D4AF37]/40 shadow-[0_10px_25px_rgba(0,0,0,0.8)]">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = activeSection === item.id;

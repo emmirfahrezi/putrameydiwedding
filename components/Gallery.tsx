@@ -12,16 +12,16 @@ export default function Gallery() {
   const [slideDirection, setSlideDirection] = useState(0);
 
   const images = [
-    "/Prewedding/weddingputra/put1.jpeg",
-    "/Prewedding/weddingputra/put2.jpeg",
-    "/Prewedding/weddingputra/put3.jpeg",
-    "/Prewedding/weddingputra/put4.jpeg",
-    "/Prewedding/weddingputra/put5.jpeg",
-    "/Prewedding/weddingputra/put6.jpeg",
-    "/Prewedding/weddingputra/put7.jpeg",
-    "/Prewedding/weddingputra/put8.jpeg",
-    "/Prewedding/weddingputra/put9.jpeg",
-    "/Prewedding/weddingputra/put10.jpeg",
+    "/Prewedding/weddingputra/put1.webp",
+    "/Prewedding/weddingputra/put2.webp",
+    "/Prewedding/weddingputra/put3.webp",
+    "/Prewedding/weddingputra/put4.webp",
+    "/Prewedding/weddingputra/put5.webp",
+    "/Prewedding/weddingputra/put6.webp",
+    "/Prewedding/weddingputra/put7.webp",
+    "/Prewedding/weddingputra/put8.webp",
+    "/Prewedding/weddingputra/put9.webp",
+    "/Prewedding/weddingputra/put10.webp",
   ];
 
   // Lightbox navigation
@@ -169,11 +169,11 @@ export default function Gallery() {
               />
 
               {/* Overlay with Photo Counter & Tap To Zoom hint */}
-              <div className="absolute top-3 right-3 bg-black/55 backdrop-blur-md px-3 py-1 rounded-full border border-[#D4AF37]/60 text-[#F3E5AB] font-cinzel text-[10.5px] font-bold tracking-widest shadow-md">
+              <div className="absolute top-3 right-3 bg-black/80 px-3 py-1 rounded-full border border-[#D4AF37]/60 text-[#F3E5AB] font-cinzel text-[10.5px] font-bold tracking-widest shadow-md">
                 {sliderIdx + 1} / {images.length}
               </div>
 
-              <div className="absolute bottom-3 left-3 bg-black/45 backdrop-blur-md px-3 py-1 rounded-full border border-white/20 text-[#FFFDF8] text-[10px] font-cinzel tracking-wider flex items-center gap-1.5 shadow-sm">
+              <div className="absolute bottom-3 left-3 bg-black/80 px-3 py-1 rounded-full border border-white/20 text-[#FFFDF8] text-[10px] font-cinzel tracking-wider flex items-center gap-1.5 shadow-sm">
                 <ZoomIn size={11} className="text-[#F3E5AB]" />
                 <span>Ketuk perbesar</span>
               </div>
@@ -185,7 +185,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 prevSlider();
               }}
-              className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 backdrop-blur-md border border-[#D4AF37]/70 text-[#F3E5AB] flex items-center justify-center hover:bg-black/70 active:scale-95 transition-all shadow-md cursor-pointer z-10"
+              className="absolute left-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/75 border border-[#D4AF37]/70 text-[#F3E5AB] flex items-center justify-center hover:bg-black/90 active:scale-95 transition-all shadow-md cursor-pointer z-10"
               aria-label="Previous Photo"
             >
               <ChevronLeft size={20} />
@@ -195,7 +195,7 @@ export default function Gallery() {
                 e.stopPropagation();
                 nextSlider();
               }}
-              className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/45 backdrop-blur-md border border-[#D4AF37]/70 text-[#F3E5AB] flex items-center justify-center hover:bg-black/70 active:scale-95 transition-all shadow-md cursor-pointer z-10"
+              className="absolute right-2.5 top-1/2 -translate-y-1/2 w-9 h-9 rounded-full bg-black/75 border border-[#D4AF37]/70 text-[#F3E5AB] flex items-center justify-center hover:bg-black/90 active:scale-95 transition-all shadow-md cursor-pointer z-10"
               aria-label="Next Photo"
             >
               <ChevronRight size={20} />

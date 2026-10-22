@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { Send, MessageSquareHeart, CheckCircle2 } from "lucide-react";
@@ -39,6 +39,22 @@ export default function WishesForm() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("wedding_wishes");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            setWishes(parsed);
+          }
+        } catch {
+          // ignore
+        }
+      }
+    }
+  }, []);
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!name.trim() || !message.trim()) return;
@@ -50,7 +66,11 @@ export default function WishesForm() {
       time: "Baru saja",
     };
 
-    setWishes([newWish, ...wishes]);
+    const updated = [newWish, ...wishes];
+    setWishes(updated);
+    if (typeof window !== "undefined") {
+      localStorage.setItem("wedding_wishes", JSON.stringify(updated));
+    }
     setName("");
     setMessage("");
     setSubmitted(true);
