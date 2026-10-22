@@ -12,14 +12,16 @@ export default function Gallery() {
   const [slideDirection, setSlideDirection] = useState(0);
 
   const images = [
-    "/Prewedding/weddingputra/PUTRA1.webp",
-    "/Prewedding/weddingputra/PUTRA2.webp",
-    "/Prewedding/weddingputra/PUTRA3.webp",
-    "/Prewedding/weddingputra/PUTRA4.webp",
-    "/Prewedding/weddingputra/PUTRA5.webp",
-    "/Prewedding/weddingputra/PUTRA6.webp",
-    "/Prewedding/weddingputra/PUTRA7.webp",
-    "/Prewedding/weddingputra/PUTRA8.webp",
+    "/Prewedding/weddingputra/put1.jpeg",
+    "/Prewedding/weddingputra/put2.jpeg",
+    "/Prewedding/weddingputra/put3.jpeg",
+    "/Prewedding/weddingputra/put4.jpeg",
+    "/Prewedding/weddingputra/put5.jpeg",
+    "/Prewedding/weddingputra/put6.jpeg",
+    "/Prewedding/weddingputra/put7.jpeg",
+    "/Prewedding/weddingputra/put8.jpeg",
+    "/Prewedding/weddingputra/put9.jpeg",
+    "/Prewedding/weddingputra/put10.jpeg",
   ];
 
   // Lightbox navigation

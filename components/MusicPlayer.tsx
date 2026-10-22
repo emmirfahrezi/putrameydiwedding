@@ -10,10 +10,29 @@ export default function MusicPlayer() {
 
   useEffect(() => {
     const playMusic = () => {
-      if (audioRef.current && !isPlaying) {
-        audioRef.current.volume = 0.5;
-        audioRef.current.play().then(() => {
+      const audio = audioRef.current;
+      if (audio && !isPlaying) {
+        audio.volume = 0.5;
+
+        const setTime = () => {
+          try {
+            if (audio.currentTime < 4) {
+              audio.currentTime = 4;
+            }
+          } catch {
+            // ignore
+          }
+        };
+
+        if (audio.readyState >= 1) {
+          setTime();
+        } else {
+          audio.addEventListener("loadedmetadata", setTime, { once: true });
+        }
+
+        audio.play().then(() => {
           setIsPlaying(true);
+          setTime();
         }).catch(e => console.log("Play prevented:", e));
       }
     };
@@ -29,6 +48,9 @@ export default function MusicPlayer() {
       if (isPlaying) {
         audioRef.current.pause();
       } else {
+        if (audioRef.current.currentTime < 4) {
+          audioRef.current.currentTime = 4;
+        }
         audioRef.current.play();
       }
       setIsPlaying(!isPlaying);
@@ -37,7 +59,7 @@ export default function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/music/bg-music.mp3" loop preload="none" />
+      <audio ref={audioRef} src="/music/sadewok.mp3#t=4" loop preload="auto" />
       
       <motion.button
         initial={{ scale: 0 }}

@@ -155,11 +155,11 @@ export default function Profiles() {
             <div className="relative w-full h-full rounded-[108px] p-[3px] bg-gradient-to-b from-[#7A1D25] via-[#56141A] to-[#7A1D25] shadow-[0_12px_30px_rgba(86,20,26,0.3)]">
               <div className="relative w-full h-full rounded-[105px] overflow-hidden bg-stone-200">
                 <Image
-                  src="/Prewedding/weddingputra/intan_profile_arch.webp"
-                  alt="Intan Permatasari"
+                  src="/Prewedding/weddingputra/put8.jpeg"
+                  alt="Meidy Purnama Ariyani"
                   fill
                   priority
-                  className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-[center_32%] hover:scale-105 transition-transform duration-700"
                 />
                 {/* Inner Gold Hairline Inset */}
                 <div className="absolute inset-1.5 rounded-[100px] border border-[#F3E5AB]/60 pointer-events-none" />
@@ -269,11 +269,11 @@ export default function Profiles() {
             <div className="relative w-full h-full rounded-[108px] p-[3px] bg-gradient-to-b from-[#7A1D25] via-[#56141A] to-[#7A1D25] shadow-[0_12px_30px_rgba(86,20,26,0.3)]">
               <div className="relative w-full h-full rounded-[105px] overflow-hidden bg-stone-200">
                 <Image
-                  src="/Prewedding/weddingputra/putra_profile_arch.webp"
+                  src="/Prewedding/weddingputra/put3.jpeg"
                   alt="Putra Pratama"
                   fill
                   priority
-                  className="object-cover object-top hover:scale-105 transition-transform duration-700"
+                  className="object-cover object-[center_30%] hover:scale-105 transition-transform duration-700"
                 />
                 {/* Inner Gold Hairline Inset */}
                 <div className="absolute inset-1.5 rounded-[100px] border border-[#F3E5AB]/60 pointer-events-none" />
